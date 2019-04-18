@@ -1,14 +1,14 @@
 document.body.innerHTML = '';
 var speed = 5;
 
-function addElement(color, key, top, left) {
+function addElement(color, key) {
     var player_el = document.createElement('div');
     player_el.style.backgroundColor = color;
     player_el.style.height = '100px';
     player_el.style.width = '100px';
     player_el.style.position = 'absolute';
-    player_el.style.top = top;
-    player_el.style.left = left;
+    player_el.style.top = '0px';
+    player_el.style.left = '0px';
 
     var keyState = {
         up: false,
