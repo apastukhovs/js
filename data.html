@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/91F85052-0E16-B440-92A8-FFFE63859809/main.js" charset="UTF-8"></script></head>
+<body>
+ 
+ <script>
+
+    var date1 = new Date();    
+     console.log("Today is: " +date1.getDate());
+     console.log("Today is: " +(date1.getMonth()+1));
+     console.log("Today is: " +date1.getFullYear());
+    var today = new Date(date1.getTime());
+    today.setDate(32);
+    console.log("There are: " + 32 - today.getDate() + "Days in Month"); 
+    var dayOfTheWeek = today.getDay();
+    var nameDayOfWeek = "";
+    switch(dayOfTheWeek) {
+        case 1: nameDayOfWeek = "Monday"; break;
+        case 2: nameDayOfWeek = "Tuesday"; break;
+        case 3: nameDayOfWeek = "Wednesday"; break;
+        case 4: nameDayOfWeek = "Thursday"; break;
+        case 5: nameDayOfWeek = "Friday"; break;
+        case 6: nameDayOfWeek = "Saturday"; break;
+        case 0: nameDayOfWeek = "Sunday"; break;
+    }
+    console.log("Day of the week: " + dayOfTheWeek);
+    console.log("Name day of week: " + nameDayOfWeek);
+
+    date1.SetDate(1);
+    date1.SetFullYear(2000);
+    date1.SetMonth(7);
+
+    var daysInNextMon = 32 - new Date(date1.getFullYear(), date1.getMonth()+1, 32).getDate();
+    console.log("There are: " + daysInNextMon + "days in Next Mon");
+    var daysInPrevMonth = 32 - new Date(date1.getFullYear(), date1.getMonth()-1, 32).getDate();
+    console.log("There are: " + daysInPrevMonth + "days in Previous Mon");
+
+    var month = today.getMonth();
+        var monthName = "";
+        switch(month){
+            case 0: monthName = "January"; break;
+            case 1: monthName = "February"; break;
+            case 2: monthName = "March"; break;
+            case 3: monthName = "April"; break;
+            case 4: monthName = "May"; break;
+            case 5: monthName = "June"; break;
+            case 6: monthName = "July"; break;
+            case 7: monthName = "August"; break;
+            case 8: monthName = "September"; break;
+            case 9: monthName = "October"; break;
+            case 10: monthName = "November"; break;
+            case 11: monthName = "December"; break;
+        }
+        console.log("Name of month - " + monthName);
+        var daysNewMonth = 32 - new Date(data1.getFullYear(), data1.getMonth(), 32).getDate();
+        var week = Math.floor(daysNewMonth/7);
+        var otherDays = daysNewMonth-(week*7);
+        console.log("Weeks in month - " + week + " and left days " + otherDays);
+
+</script>   
+</body>
+</html>
