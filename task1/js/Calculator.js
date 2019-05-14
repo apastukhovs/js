@@ -1,31 +1,42 @@
-function Calc(a, b) {
-    if (isNaN(a) || isNaN(b)) {
-        return (console.log('ERROR!', a , 'or', b, 'is not a number'));
-    }
-    else {
-        this.a = a;
-        this.b = b;
-    }
+function Calc() {
+    var a = 0;
+    var b = 0;
+    var result = 0;
+
+
+Calc.prototype.setA = function(a) {
+    this.a = a;
 }
 
-Calc.prototype.multiple = function(multiple) {
-    return this.a * this.b;
+Calc.prototype.setB = function(b) {
+    this.b = b;
 }
 
-Calc.prototype.divide = function(devide) {
-    return this.a / this.b;
+
+Calc.prototype.multiple = function() {
+    return this.result = this.a * this.b;
 }
 
-Calc.prototype.min = function(min) {
-    return this.a - this.b;
+Calc.prototype.divide = function() {
+    return this.result = this.a / this.b;
 }
 
-Calc.prototype.sum = function(sum) {
-    return this.a + this.b;
+Calc.prototype.min = function() {
+    return this.result = this.a - this.b;
 }
 
-var result = new Calc(8,2);
-console.log(result.multiple());
-console.log(result.divide());
-console.log(result.min());
-console.log(result.sum());
+Calc.prototype.sum = function() {
+    return this.result = this.a + this.b;
+}
+
+Calc.prototype.show = function() {
+    console.log(this.result);
+ }
+}
+
+var res = new Calc();
+res.setA(8);
+res.setB(5);
+res.min();
+res.show();
+

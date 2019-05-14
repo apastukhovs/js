@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CW - 7</title>
+</head>
+<body>
+  <div id="app">
+    <div class="catalog">
+      <h3>Catalog:</h3>
+      <ol>
+        <li v-for="item in ingrArr" style="margin-bottom: 5px">
+          <button type="button" @click="add(item)">Add</button>
+          <span>{{ item.name }}</span> - 
+          <span>{{ item.price }}</span>
+        </li>
+      </ol>
+    </div>
+    <div class="cart">
+      <h3>Cart:</h3>
+      <ol>
+        <li v-for="item in ingrArr" v-if="item.count" style="margin-bottom: 5px">
+          <button type="button" @click="remove(item)">Remove</button>
+          <span>{{ item.name }} x {{ item.count }}</span> - 
+          <span>{{ item.price*item.count }}</span>
+        </li>
+      </ol>
+      <span>Total price: {{ total_price }}</span>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

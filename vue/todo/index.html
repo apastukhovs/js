@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item, key) in todo" :key="key" >
+                <span >{{key}}</span>
+                <button  @click="remove(key)" type="button">X</button>
+                <button  @click="edit(key,item)" type="button" v-if="activeKey===null">Edit</button>
+                <button  @click="apply(key,item)" type="button" v-if="activeKey===key">Apply</button>
+                <input type="text" v-model="item" v-if="activeKey===key">
+                <span v-if="activeKey===null">{{ item }}</span>
+            </li>
+        </ul>
+        <div>
+            <input type="text" v-model="message">
+            <button type="button" @click="add">Add</button>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: function() {
+                return {
+                    message: '',
+                    todo: JSON.parse(localStorage.todo || '[]'),
+                    activeKey: null,
+                }
+            },
+            methods: {
+                add: function() {
+                    this.todo.push(this.message);
+                    this.message = '';
+                },
+                remove: function(key) {
+                    this.todo.splice(key, 1);
+                },
+                edit: function(key,value) {                    
+                    this.activeKey = key;        
+                    
+                },
+                apply: function(key,item) {
+                    this.activeKey = null;
+                    this.todo[key]=item;
+                    this.todo.push();
+                }
+            },
+            watch: {
+                todo: function(value) {
+                    localStorage.todo = JSON.stringify(value);
+                },
+            }
+        });
+    </script>
+</body>
+</html>
