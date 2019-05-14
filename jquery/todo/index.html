@@ -1,0 +1,110 @@
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="todo">
+        <h1>ToDoList</h1>
+        <ul class="js_list"></ul>
+        <input type="text" class="js_add_input">
+        <button class="js_add_button">Add</button>
+    </div>
+    <script type="text/template" id="todo_item_template">
+        <button class="js_item_remove_btn" type="button">X</button>
+        <button class="js_item_edit_btn" type="button">Edit</button>
+        <button class="js_item_apply_btn" type="button" style="display: none">Apply</button>
+        <input class="js_item_input" type="text" value="{{val}}" style="display: none;">
+        <span class="js_item_text">{{val}}</span>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+    (function($){
+        document.addEventListener('DOMContentLoaded', function() {
+
+        })
+
+        $(function(){
+
+        });
+
+        var dom = $('#todo'),
+            add_input = dom.find('.js_add_input'),
+            add_btn = dom.find('.js_add_button'),
+            list = dom.find('.js_list'), 
+            list_arr = $.parseJSON(localStorage.getItem('todo') || '[]');
+            item_template = $('#todo_item_template').text();
+
+            
+        function save() {
+            localStorage.setItem('todo', JSON.stringify(list_arr))
+        }
+
+        function buildList() {
+            list.html('');
+
+            $(list_arr).each(function(index, text){
+                var item = makeItem(text);
+                list.append(item);
+                setItemActions(item, index);
+            })
+
+
+        };
+
+        function makeItem(value) {
+            var li = $('<li>');
+            li.html(item_template.replace(/{{val}}/g, value));
+            return li;
+        }
+
+        function setItemActions(item, index) {
+            var remove_btn = item.find('.js_item_remove_btn'),
+                edit_btn = item.find('.js_item_edit_btn'),
+                apply_btn = item.find('.js_item_apply_btn'),
+                edit_input = item.find('.js_item_input'),
+                item_text = item.find('.js_item_text');
+            remove_btn.on('click', function() {
+                list_arr.splice(index, 1);
+                changeAction();
+            });
+
+            edit_btn.on('click', function() {
+                edit_input.show();
+                apply_btn.show();
+                edit_btn.hide();
+                item_text.hide();
+            })
+
+            apply_btn.on('click', function() {
+                edit_input.show();
+                apply_btn.hide();
+                edit_btn.show();
+                item_text.hide();
+                list_arr[index]=edit_input.val();
+                changeAction();
+            })
+        }
+
+        function changeAction() {
+            buildList();
+            save();
+        }
+
+        add_btn.on('click', function() {
+            var text = add_input.val();
+            list_arr.push(text);
+            add_input.val('');
+            changeAction();
+        });
+
+        buildList();
+
+    }(jQuery))
+    </script>
+</body>
+</html>
