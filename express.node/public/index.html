@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Express App</title>
+</head>
+<body>
+    <form>
+        <input type="text" class="input" value="">
+        <button type="submit" id="send_btn" onclick="send()">SEND</button>
+        <button type="submit" id="get_btn" onclick="get()">GetData</button>
+    </form>
+    <div class="output">
+        <ul class="list" >
+        </ul></div>
+    </div>
+    <script>
+
+        var list = document.getElementsByClassName('list');
+        get_btn.onclick = function () {
+            dataList.innerHTML = "";
+            fetch('/test.json')
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    items.push(data);
+                    for (var i = 0; i < items.length; i++) {
+                        console.log(items[i].items[i].data);
+                        var newLi = document.createElement('li');
+                        newLi.innerHTML = items[i].items[i].data;
+                        dataList.appendChild(newLi);
+                    }
+            });
+        }
+
+        // Example GET request
+        fetch('/test.json')
+        .then((res) => res.json())
+        // function(res) { return res.json() }
+        .then((data) => { 
+            console.log(data) 
+        });
+
+        // Example POST request
+
+        var item = "";
+        var items = [];
+        var dataInput = document.getElementsByClassName('input');
+        send_btn.onclick = function () {
+            var dataInp = document.getElementsByTagName("input")[0];
+            val = dataInp.value;
+
+             //Exapmle POST request
+            fetch('/set_test', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: val })
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                });
+            dataInput.innerHTML = "";
+            }
+    </script>
+</body>
+</html>
