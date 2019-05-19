@@ -21,7 +21,7 @@ server.all('/all_data', (req, res) => {
 server.post('/set_test', (req, res) => {
     console.log(req.body);
     res.json(req.body);
-    itemArr.push(req.body);
+    items.push(req.body);
 });
 
 server.listen(port, () => {

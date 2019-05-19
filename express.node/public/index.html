@@ -9,18 +9,19 @@
 <body>
     <form>
         <input type="text" class="input" value="">
-        <button type="submit" id="send_btn" onclick="send()">SEND</button>
-        <button type="submit" id="get_btn" onclick="get()">GetData</button>
+        <button type="button" id="send_btn" onclick="send()">SEND</button>
+        
     </form>
     <div class="output">
-        <ul class="list" >
-        </ul></div>
+        <button type="button" id="get_btn" onclick="get()">GetData</button>
+        <ul id="list">
+        </ul>
     </div>
     <script>
-
-        var list = document.getElementsByClassName('list');
+        var listData = document.getElementById('list');
+        console.log(listData);
         get_btn.onclick = function () {
-            dataList.innerHTML = "";
+            listData.innerHTML = "";
             fetch('/test.json')
                 .then((res) => res.json())
                 .then((data) => {
@@ -30,28 +31,19 @@
                         console.log(items[i].items[i].data);
                         var newLi = document.createElement('li');
                         newLi.innerHTML = items[i].items[i].data;
-                        dataList.appendChild(newLi);
+                        listData.appendChild(newLi);
+                        console.log(list);
                     }
             });
+            console.log(items);
         }
-
-        // Example GET request
-        fetch('/test.json')
-        .then((res) => res.json())
-        // function(res) { return res.json() }
-        .then((data) => { 
-            console.log(data) 
-        });
-
         // Example POST request
-
         var item = "";
         var items = [];
         var dataInput = document.getElementsByClassName('input');
         send_btn.onclick = function () {
             var dataInp = document.getElementsByTagName("input")[0];
-            val = dataInp.value;
-
+            item = dataInp.value;
              //Exapmle POST request
             fetch('/set_test', {
                 method: 'POST',
@@ -59,7 +51,7 @@
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data: val })
+                body: JSON.stringify({ data: item })
             })
                 .then((res) => res.json())
                 .then((data) => {
@@ -68,5 +60,14 @@
             dataInput.innerHTML = "";
             }
     </script>
+
+    <style>
+        .list{
+            display: block;
+        }
+        #get_btn{
+            display: block;
+        }
+    </style>
 </body>
 </html>
